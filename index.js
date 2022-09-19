@@ -11,7 +11,6 @@ const server = http.createServer(function (req, res) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.setHeader("Access-Control-Max-Age", 2592000); // 30 days
 
   switch (req.url.toLowerCase()) {
     case "/":
@@ -37,14 +36,18 @@ const getCars = (req, res) => {
   );
 };
 const saveCar = (req, res) => {
-  var body = "";
+  let body = "";
 
   req.on("data", function (data) {
     body += data;
   });
 
   req.on("end", function () {
-    body = JSON.parse(body);
+    try {
+      body = JSON.parse(body);
+    } catch (error) {
+      console.log(error);
+    }
     let fields = [
       "categories",
       "brand",
@@ -62,7 +65,7 @@ const saveCar = (req, res) => {
         body[field] == null ||
         body[field] == ""
       ) {
-        res.end(JSON.stringify({ error: field + " is not exist" }));
+        res.end(JSON.stringify({ error: field + " does not exist" }));
         return;
       }
     }
@@ -88,21 +91,23 @@ const saveCar = (req, res) => {
 
 const sellCar = (req, res) => {
   var body = "";
-
   req.on("data", function (data) {
-    console.log(data);
     body += data;
   });
 
   req.on("end", function () {
-    body = JSON.parse(body);
+    try {
+      body = JSON.parse(body);
+    } catch (error) {
+      console.log(error);
+    }
 
     if (
       !body.hasOwnProperty("plate") ||
       body.plate == null ||
       body.plate == ""
     ) {
-      res.end(JSON.stringify({ error: field + " is not exist" }));
+      res.end(JSON.stringify({ error: "plate does  not exist" }));
       return;
     }
 

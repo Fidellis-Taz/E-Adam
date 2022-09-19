@@ -1,87 +1,83 @@
 let tbody = document.querySelector("tbody");
-let addBtn = document.querySelector(".add");
-let form = document.querySelector(".form-wrapper");
-let saveBtn = document.querySelector(".save");
-let cancelBtn = document.querySelector(".cancel");
-let mobileEle = document.querySelector("#mobile");
-let priceEle = document.querySelector("#price");
-let ramEle = document.querySelector("#ram");
-let storageEle = document.querySelector("#storage");
 
-let httpm = null;
+const searchInput = document.getElementById("myInput");
+const searchCategories = document.getElementById("category");
 
-let url = "http://localhost:8001/getCars";
+let url = "http://localhost:8001";
 
-let mobiles = [];
+let cars = [];
 
 let id = null;
 
 let data = {};
 
-addBtn.onclick = function () {
-  httpm = "POST";
-  clearForm();
-  form.classList.add("active");
-};
+//requests
+const sendHttpRequest = (method, url, data) => {
+  const promise = new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url);
 
-cancelBtn.onclick = function () {
-  form.classList.remove("active");
-};
+    xhr.responseType = "json";
 
-saveBtn.onclick = function () {
-  data.name = mobileEle.value;
-  data.price = priceEle.value;
-  data.ram = ramEle.value;
-  data.storage = storageEle.value;
-  if (httpm == "PUT") {
-    data.id = id;
-  }
+    //add headers
+    if (data) {
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.setRequestHeader("Accept", "application/json");
+    }
+    xhr.onload = () => {
+      if (xhr.status >= 400) {
+        reject(xhr.response);
+      } else {
+        resolve(xhr.response);
+      }
+    };
 
-  fetch(url, {
-    method: httpm,
-    body: JSON.stringify(data),
-    headers: { "Content-type": "application/json" },
-  }).then(() => {
-    clearForm();
-    form.classList.remove("active");
-    getMobiles();
+    xhr.onerror = () => {
+      reject("Something went wrong");
+    };
+    xhr.send(JSON.stringify(data));
   });
+  return promise;
 };
 
-function clearForm() {
-  mobileEle.value = null;
-  priceEle.value = null;
-  ramEle.value = null;
-  storageEle.value = null;
+/* function clearForm() {
+  categoriesEl.value = null;
+  brandEl.value = null;
+  seriesEl.value = null;
+  yearEl.value = null;
+  colorEl.value = null;
+  kmEl.value = null;
+  engineCapacityEl.value = null;
+  plateEl.value = null;
+}
+ */
+
+//GET Cars
+function getCars() {
+  sendHttpRequest("GET", `${url}/getCars`).then((responseData) => {
+    console.log(responseData);
+    cars = responseData;
+    updateTable(cars);
+  });
 }
 
-function getMobiles() {
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      mobiles = data;
-      updateTable();
-    });
-}
+getCars();
 
-getMobiles();
-
-function updateTable() {
+function updateTable(cars) {
   let data = "";
 
-  if (mobiles.length > 0) {
-    for (i = 0; i < mobiles.length; i++) {
-      data += `<tr id="${mobiles[i]["plate"]}">
-                        <td>${mobiles[i]["categories"]}</td>
-                        <td>${mobiles[i]["brand"]}</td>
-                        <td>${mobiles[i]["series"]}</td>
-                        <td>${mobiles[i]["year"]}</td>
-                        <td>${mobiles[i]["color"]}</td>
-                        <td>${mobiles[i]["km"]}</td>
-                        <td>${mobiles[i]["engineCapacity"]}</td>
-                        <td>${mobiles[i]["plate"]}</td>
-                        <td><button class="btn btn-primary" onclick="editMobile(event)">Edit</button></td>
-                        <td><button class="btn btn-danger" onclick="deleteMobile(event)">Delete</button></td>   
+  if (cars.length > 0) {
+    for (i = 0; i < cars.length; i++) {
+      data += `<tr id="${cars[i]["plate"]}">
+                        <td>${cars[i]["categories"]}</td>
+                        <td id="filterB">${cars[i]["brand"]}</td>
+                        <td>${cars[i]["series"]}</td>
+                        <td>${cars[i]["year"]}</td>
+                        <td>${cars[i]["color"]}</td>
+                        <td>${cars[i]["km"]}</td>
+                        <td>${cars[i]["engineCapacity"]}</td>
+                        <td id="filterB">${cars[i]["plate"]}</td>
+                         <td><button class="btn btn-danger" onclick="deleteCar(event)">Sell Car</button></td>   
                      </tr>`;
     }
 
@@ -89,32 +85,75 @@ function updateTable() {
   }
 }
 
-function editMobile(e) {
-  form.classList.add("active");
-  httpm = "PUT";
-  id = e.target.parentElement.parentElement.id;
-  let selectedMobile = mobiles.filter((m) => {
-    return m["id"] == id;
-  })[0];
-  mobileEle.value = selectedMobile.name;
-  priceEle.value = selectedMobile.price;
-  ramEle.value = selectedMobile.ram;
-  storageEle.value = selectedMobile.storage;
-}
+//delete Car
+async function deleteCar(e) {
+  const plate1 = e.target.parentElement.parentElement.id;
 
-function deleteMobile(e) {
-  const plate = e.target.parentElement.parentElement.id;
-  const data = {
-    plate: plate,
-  };
-  console.log(data);
-  fetch("http://localhost:8001/sellCar", {
-    method: "POST", // or 'PUT'
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-    body: JSON.stringify(data),
-  }).then(() => {
-    getMobiles();
-  });
+  if (confirm("Do you really want to sell the car") == true) {
+    sendHttpRequest("DELETE", `${url}/sellCar`, {
+      plate: plate1,
+    })
+      .then((responseData) => {
+        console.log(responseData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
+//CAR FILTERS
+
+//search By brand or Plate
+searchInput.addEventListener("keyup", (e) => {
+  // console.log(e.target.value);
+  if (e.target.value) {
+    const newCars = cars.filter(function (el) {
+      const searchValue = e.target.value.toLowerCase();
+      return (
+        el.brand.toLowerCase().startsWith(searchValue) ||
+        el.plate.toLowerCase().startsWith(searchValue)
+      );
+    });
+    //console.log(newCars);
+
+    updateTable(newCars);
+  } else {
+    updateTable(cars);
+  }
+});
+
+//search Categories
+searchCategories.addEventListener("change", (e) => {
+  //console.log(e.target.value);
+  if (e.target.value.toLowerCase() == "all") {
+    updateTable(cars);
+  } else if (e.target.value) {
+    const newCars = cars.filter(function (el) {
+      const searchValue = e.target.value.toLowerCase();
+      return el.categories.toLowerCase().startsWith(searchValue);
+    });
+    if (newCars.length > 0) {
+      //console.log(newCars);
+
+      updateTable(newCars);
+    } else {
+      //console.log("no data");
+      tbody.innerHTML = `<div class="no-cars-found">No Cars found<div/>`;
+    }
+  }
+});
+
+// SOCIAL PANEL JS
+const floating_btn = document.querySelector(".floating-btn");
+const close_btn = document.querySelector(".close-btn");
+const social_panel_container = document.querySelector(
+  ".social-panel-container"
+);
+
+floating_btn.addEventListener("click", () => {
+  social_panel_container.classList.toggle("visible");
+});
+
+close_btn.addEventListener("click", () => {
+  social_panel_container.classList.remove("visible");
+});

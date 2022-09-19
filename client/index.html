@@ -5,17 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD</title>
-    <!-- CSS only -->
+
+    <!-- js File -->
+    <script defer src="/client/src/js/script.js"></script>
+
+    <!-- to style the table -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="/client/src/css/main.css">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="/client/src/css/main.css"> 
+    <!-- for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
     <div class="carList">
-
 <div class="filters">
     <h6>Filter Cars By Brand or Plate</h6>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for car brand or plate.." title="Type in a car brand or plate">
+    <input type="text" id="myInput" placeholder="Enter car brand or plate.." title="Type in a car brand or plate">
 
 <div class="filter__Category">
     <h6>Filter by Category</h6>
@@ -35,8 +41,8 @@
         <div class="container mob-table">
             <div class="headers">
                 <h2 class="table-title">Manage Cars</h2>
-                <button class="btn add">Add Car</button>
-            </div>
+                <button class="btn add"><a  href="/client/addCar.html">Add Car</a></button>
+             </div>
     
             <table class="table table-striped">
                 <thead>
@@ -49,7 +55,7 @@
                         <th>KM</th>
                         <th>Engine Capacity</th>
                         <th>Plate</th>
-                        
+                         
                         <th></th>
                         <th></th>
                     </tr>
@@ -60,56 +66,44 @@
             </table>
         </div>
     
-        <div class="form-wrapper">
-            <div class="mobileForm">
-    
-                <div class="group">
-                    <label for="mobile">Categories</label>
-                    <input type="text" class="form-control" id="categories" required minlength="5">
-                </div>
-                <div class="group">
-                    <label for="price">Brand</label>
-                    <input type="text" class="form-control" id="brand" required min="1000">
-                </div>
-                <div class="group">
-                    <label for="ram">Series</label>
-                    <input type="text" class="form-control" id="series" required min="1">
-                </div>
-                <div class="group">
-                    <label for="storage">Year</label>
-                    <input type="number" class="form-control" id="year" required min="1">
-                </div>
-                <div class="group">
-                    <label for="storage">Color</label>
-                    <input type="text" class="form-control" id="color" required min="1">
-                </div>
          
-                <div class="group">
-                    <label for="storage">KM</label>
-                    <input type="number" class="form-control" id="km" required min="1">
-                </div>
-                <div class="group">
-                    <label for="storage">Engine Capacity</label>
-                    <input type="number" class="form-control" id="engineCapacity" required min="1">
-                </div>
-                <div class="group">
-                    <label for="storage">Plate</label>
-                    <input type="text" class="form-control" id="plate" required min="1">
-                </div>
-    
-                <div class="action">
-                    <button class="btn btn-primary save">Save Changes</button>
-                    <button class="btn btn-danger cancel">Cancel</button>
-                </div>
-    
-            </div>
-    
-        </div>
-    
  
     </div>
 
 
-<script src="/client/src/js/scriptTest.js"></script>
-</body>
+<!-- SOCIAL PANEL HTML -->
+<div class="social-panel-container">
+	<div class="social-panel">
+		<p>Created with <i class="fa fa-heart"></i> by
+			<a target="_blank" href="https://florin-pop.com">Fidellis Tazvivinga</a></p>
+		<button class="close-btn"><i class="fas fa-times"></i></button>
+		<h4>Get in touch on</h4>
+		<ul>
+            <li>
+				<a href="https://www.linkedin.com/in/fidellis-tazvivinga/" target="_blank">
+					<i class="fab fa-linkedin"></i>
+				</a>
+			</li>
+            <li>
+                <a href="https://github.com/Fidellis-Taz" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </li>
+			<li>
+				<a href="https://fidellis-portfolio.herokuapp.com/" target="_blank">
+					<i class="fa-solid fa-briefcase"></i>
+				</a>
+			</li>
+			
+			  
+			</li>
+		</ul>
+	</div>
+</div>
+<button class="floating-btn">
+	Get in Touch
+</button>
+
+ 
+ </body>
 </html>

@@ -4,66 +4,157 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/client/src/css/main.css" />
-
-    <title>Document</title>
+    <title>Add Car</title>
+    <!-- Add Car CSS -->
+    <link rel="stylesheet" href="/client/src/css/addCar.css" />
+  <!-- js File -->
+  <script defer src="/client/src/js/addCar.js"></script>
 </head>
 <body>
-    <div >
-
-
-
-        <table>
-            <tr>
-                <td>
-                    <form autocomplete="off" onsubmit="onFormSubmit()">
-                        <div>
-                            <label for="productCode">Product Code</label>
-                            <input type="text" name="productCode" id="productCode">
-                        </div>
-                        <div>
-                            <label for="product">Product Name</label>
-                            <input type="text" name="product" id="product">
-                        </div>
-                        <div>
-                            <label for="qty">Qty</label>
-                            <input type="number" name="qty" id="qty">
-                        </div>
-                        <div>
-                            <label for="perPrice">Price</label>
-                            <input type="number" name="perPrice" id="perPrice">
-                        </div>
-    
-                        <div class="form_action--button">
-                            <input type="submit" value="Submit">
-                            <input type="reset" value="Reset">
-                        </div>
-                    </form>
-    
-                    <td>
-                        <table class="list" id="storeList">
-                            <thead>
-                                <tr>
-                                    <th>Product Code</th>
-                                    <th>Product Name</th>
-                                    <th>Qty</th>
-                                    <th>Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-    
-                            </tbody>
-                        </table>
-                    </td>
-                </td>
-            </tr>
-        </table>
  
+    <div class="container">
+        <h2 class="title">Add a new Car </h2>
+        <form action="#" class="form">
+      
+          <div class="form-inline-input">
+        <!-- Categories -->
+            <div class="input-group">
+                <label for="username" class="label">Categories</label>
+                <select id="categories" name="categories"class="category">
+                    <option value="" disabled selected hidden>Select Category</option>
+                
+                     <option value="SEDAN">SEDAN</option>
+                    <option value="HATCHBACK">HATCHBACK</option>
+                    <option value="STATION">STATION</option>
+                    <option value="CABRIO">CABRIO</option>
+                    <option value="SUV">SUV</option>
+                  </select>
+                 <span class="error-message"></span>
+                <svg class="icon icon-success hidden hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+          
+                <svg class="icon icon-error hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+              </div>
+        <!-- Brand -->
+              <div class="input-group">
+                <label for="brand" class="label">Brand</label>
+                <input id="brand" placeholder="Brand" type="text" class="input">
+                <span class="error-message"></span>
+                <svg class="icon icon-success hidden hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+          
+                <svg class="icon icon-error hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+              </div>
 
-    </div>
+          </div>
+
+        <!-- Series -->
+
+          <div class="form-inline-input">
+            <div class="input-group">
+              <label for="series" class="label">Series</label>
+              <input id="series" placeholder="Series..." type="text" class="input">
+              <span class="error-message"></span>
+              <svg class="icon icon-success hidden hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+        
+              <svg class="icon icon-error hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
+            </div>  
+           
+        <!-- Year -->
+            <div class="input-group">
+              <label for="year" class="label">Year</label>
+              <input id="year" placeholder="Year" maxlength="4" name="year"   type="text" class="input">
+              <span class="error-message"></span>
+              <svg class="icon icon-success hidden hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+        
+              <svg class="icon icon-error hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
+            </div>
+
+        </div>
+        <div class="form-inline-input">
+            <!-- Color -->
+            <div class="input-group">
+              <label for="color" class="label">Color</label>
+              <input id="color" placeholder="Color..." type="text" class="input">
+              <span class="error-message"></span>
+              <svg class="icon icon-success hidden hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+        
+              <svg class="icon icon-error hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
+            </div>  
+           
+        <!-- KM -->
+            <div class="input-group">
+              <label for="km" class="label">KM</label>
+              <input id="km" placeholder="KM.." type="text" name="km" class="input">
+              <span class="error-message"></span>
+              <svg class="icon icon-success hidden hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+        
+              <svg class="icon icon-error hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
+            </div>
+
+        </div>
 
 
+        <div class="form-inline-input">
+            <!-- Engine Capacity -->
+            <div class="input-group">
+              <label for="engineCapacity" class="label">Engine Capacity</label>
+              <input id="engineCapacity" placeholder="Engine Capacity" type="text" name="engineCapacity" class="input">
+              <span class="error-message"></span>
+              <svg class="icon icon-success hidden hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+        
+              <svg class="icon icon-error hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
+            </div>  
+           
+         <!-- Plate -->
+            <div class="input-group">
+              <label for="plate" class="label">Plate</label>
+              <input id="plate" placeholder="Plate" name="plate" type="text" class="input">
+              <span class="error-message"></span>
+              <svg class="icon icon-success hidden hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+        
+              <svg class="icon icon-error hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
+            </div>
+
+        </div>
+        <!-- Home Link  -->
+          <input type="submit" class="button" value="Add Car">
+          <div class="go-back-home">
+              <a href="/client/index.html">Go Back To Home Page</a>
+          </div>
+        </form>
+      </div>
+      
  
-<script src = "/client/src/js/script.js"></script>
-</body>
+ </body>
 </html>
