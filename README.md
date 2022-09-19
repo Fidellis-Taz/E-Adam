@@ -35,7 +35,7 @@ The project is not running on the browser
 In the front page of the browser you will see a list of Cars and their specifications displayed in table format.
 On that page you can Filter the Cars according to their brand or plate number .You can also filter the cars according to their categories.
 
-![Image](/client/src/img/frontPage.png)
+![Image](/client/src/img/frontpage.png)
 
 In this page you can also sell the cars.
 
